@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 class NetworkService{
   late Dio _dio;
-  final _baseurl = 'http://api.nstack.in/v1/';
+  final _baseurl = 'http://api.nstack.in/v1';
 
   NetworkService() {
     _dio = Dio(

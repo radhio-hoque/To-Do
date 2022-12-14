@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do/constants/string.dart';
+import 'package:to_do/cubit/todos_cubit.dart';
 
 class TodosScreen extends StatelessWidget {
   const TodosScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
+    BlocProvider.of<TodosCubit>(context).fetchTodos();
 
     return Scaffold(
       appBar: AppBar(
@@ -21,8 +23,34 @@ class TodosScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Text('Todos Screen'),
+      body: BlocBuilder<TodosCubit, TodosState>(
+        builder: (context, state) {
+          if (state is TodosInitialState) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is TodosLoadedState) {
+            final todos = state.todos;
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                final todo = todos[index];
+                return ListTile(
+                  title: Text(todo.title),
+                  // leading: Image.network(todo.avatar),
+                  subtitle: Text(todo.description),
+                );
+              },
+              itemCount: todos.length,
+            );
+          }
+          if (state is TodosErrorState) {
+            return Center(
+              child: Text(state.error),
+            );
+          }
+          return Container();
+        },
       ),
     );
   }

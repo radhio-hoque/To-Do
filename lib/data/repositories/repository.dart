@@ -1,21 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:to_do/data/models/items.dart';
 import 'package:to_do/data/services/network_service.dart';
+
 import '../models/todo.dart';
 
-class TodoRepository{
+class TodoRepository {
+  final NetworkService networkService;
 
-  NetworkService networkService = NetworkService();
-  Future<Todo> getListUser() async {
+  TodoRepository(this.networkService);
+
+  Future<List<Items>> fetchTodos() async {
     Response response;
     try {
-      response = await networkService.getRequest('');
+      response = await networkService.getRequest('/todos');
       if (response.statusCode == 200) {
-        return Todo.fromJson(response.data);
+        Todo todoRaw = Todo.fromJson(response.data);
+        return todoRaw.items;
       } else {
-        if (kDebugMode) {
-          print('There is some problem status code not 200');
-        }
         throw Exception('status code : ${response.statusCode}');
       }
     } on Exception catch (e) {

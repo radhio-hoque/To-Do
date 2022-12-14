@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do/constants/string.dart';
 import 'package:to_do/cubit/todos_cubit.dart';
 import 'package:to_do/data/repositories/repository.dart';
+import 'package:to_do/data/services/network_service.dart';
 import 'package:to_do/presentation/screens/add_todo_screen.dart';
 import 'package:to_do/presentation/screens/edit_todo_screen.dart';
 import 'package:to_do/presentation/screens/todos_screen.dart';
@@ -13,7 +14,7 @@ class TodoRouter {
   late TodoRepository todoRepository;
 
   TodoRouter(){
-    todoRepository = TodoRepository();
+    todoRepository = TodoRepository(NetworkService());
   }
 
   Route? generateRoute(RouteSettings settings) {

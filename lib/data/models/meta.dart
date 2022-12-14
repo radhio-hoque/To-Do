@@ -7,6 +7,7 @@ class Meta {
     required this.pageSize,
     required this.hasMorePage,
   });
+
   late final int totalItems;
   late final int totalPages;
   late final int perPageItem;
@@ -14,7 +15,7 @@ class Meta {
   late final int pageSize;
   late final bool hasMorePage;
 
-  Meta.fromJson(Map<String, dynamic> json){
+  Meta.fromJson(Map<String, dynamic> json) {
     totalItems = json['total_items'];
     totalPages = json['total_pages'];
     perPageItem = json['per_page_item'];

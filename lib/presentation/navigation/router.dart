@@ -10,10 +10,9 @@ import 'package:to_do/presentation/screens/edit_todo_screen.dart';
 import 'package:to_do/presentation/screens/todos_screen.dart';
 
 class TodoRouter {
-
   late TodoRepository todoRepository;
 
-  TodoRouter(){
+  TodoRouter() {
     todoRepository = TodoRepository(NetworkService());
   }
 

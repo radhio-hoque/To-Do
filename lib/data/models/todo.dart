@@ -11,6 +11,7 @@ class Todo {
     required this.items,
     required this.meta,
   });
+
   late final int code;
   late final bool success;
   late final int timestamp;
@@ -18,12 +19,12 @@ class Todo {
   late final List<Items> items;
   late final Meta meta;
 
-  Todo.fromJson(Map<String, dynamic> json){
+  Todo.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     success = json['success'];
     timestamp = json['timestamp'];
     message = json['message'];
-    items = List.from(json['items']).map((e)=>Items.fromJson(e)).toList();
+    items = List.from(json['items']).map((e) => Items.fromJson(e)).toList();
     meta = Meta.fromJson(json['meta']);
   }
 
@@ -33,7 +34,7 @@ class Todo {
     data['success'] = success;
     data['timestamp'] = timestamp;
     data['message'] = message;
-    data['items'] = items.map((e)=>e.toJson()).toList();
+    data['items'] = items.map((e) => e.toJson()).toList();
     data['meta'] = meta.toJson();
     return data;
   }

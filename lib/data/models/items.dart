@@ -7,6 +7,7 @@ class Items {
     required this.createdAt,
     required this.updatedAt,
   });
+
   late final String id;
   late final String title;
   late final String description;
@@ -14,7 +15,7 @@ class Items {
   late final String createdAt;
   late final String updatedAt;
 
-  Items.fromJson(Map<String, dynamic> json){
+  Items.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     title = json['title'];
     description = json['description'];

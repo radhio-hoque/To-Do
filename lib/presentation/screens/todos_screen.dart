@@ -13,11 +13,11 @@ class TodosScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todos'),
+        title: const Text('Todos'),
         actions: [
           InkWell(
             onTap: () => Navigator.pushNamed(context, ADD_TODO_ROUTE),
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.all(10.0),
               child: Icon(Icons.add_circle_outline),
             ),
@@ -32,7 +32,7 @@ class TodosScreen extends StatelessWidget {
             );
           }
           if (state is TodosLoadedState) {
-            final todos = state.todos;
+            final todos = state.todos.reversed;
             if(todos.isNotEmpty){
               return SingleChildScrollView(
                 child: Column(

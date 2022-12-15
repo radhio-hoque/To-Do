@@ -18,7 +18,7 @@ class TodoRepository {
         Todo todoRaw = Todo.fromJson(response.data);
         return todoRaw.todos;
       } else {
-        throw Exception('status code : ${response.statusCode}');
+        throw Exception(response);
       }
     } on Exception catch (e) {
       if (kDebugMode) {
@@ -36,7 +36,25 @@ class TodoRepository {
       if (response.statusCode == 200) {
         return Todos.fromJson(response.data);
       } else {
-        throw Exception('status code : ${response.statusCode}');
+        throw Exception(response);
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Todos> createTodo(String title) async {
+    Todos todos = Todos(todo: title, completed: false, userId: 10);
+    Response response;
+    try {
+      response = await networkService.postRequest('/todos/add', todos);
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return Todos.fromJson(response.data);
+      } else {
+        throw Exception(response);
       }
     } on Exception catch (e) {
       if (kDebugMode) {

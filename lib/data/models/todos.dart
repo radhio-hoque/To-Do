@@ -1,6 +1,6 @@
 class Todos {
   Todos({
-    required this.id,
+    this.id,
     required this.todo,
     required this.completed,
     required this.userId,

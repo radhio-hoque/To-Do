@@ -41,18 +41,18 @@ class NetworkService {
       return response;
   }
 
-  // Future<Response> postRequest(String path, CreateUser createUser) async {
-  //   late Response response;
-  //   try {
-  //     response = await _dio.post(path, data: createUser.toJson());
-  //   } on DioError catch (e) {
-  //     if (kDebugMode) {
-  //       print(e.message);
-  //     }
-  //     throw Exception(e.message);
-  //   }
-  //   return response;
-  // }
+  Future<Response> postRequest(String path, Todos createTodo) async {
+    late Response response;
+    try {
+      response = await _dio.post(path, data: createTodo.toJson());
+    } on DioError catch (e) {
+      if (kDebugMode) {
+        print(e.message);
+      }
+      throw Exception(e.message);
+    }
+    return response;
+  }
 
   // Future<Response> putRequest(String path, CreateUser createUser) async {
   //   late Response response;

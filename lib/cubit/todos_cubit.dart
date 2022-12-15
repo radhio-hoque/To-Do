@@ -35,4 +35,13 @@ class TodosCubit extends Cubit<TodosState> {
       emit(TodosLoadedState(currentState.todos));
     }
   }
+
+  void addTodo(Todos todo) {
+    final currentState = state;
+    if (currentState is TodosLoadedState) {
+      final currentTodoList = currentState.todos;
+      currentTodoList.add(todo);
+      emit(TodosLoadedState(currentTodoList));
+    }
+  }
 }

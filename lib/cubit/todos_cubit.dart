@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:to_do/data/models/items.dart';
+import 'package:to_do/data/models/todos.dart';
 
 import '../data/repositories/repository.dart';
 
@@ -14,10 +14,25 @@ class TodosCubit extends Cubit<TodosState> {
   Future<void> fetchTodos() async {
     emit(TodosInitialState());
     try {
-      List<Items> todos = await todoRepository.fetchTodos();
-      emit(TodosLoadedState(todos));
+      todoRepository.fetchTodos().then((todos) {
+        emit(TodosLoadedState(todos));
+      });
     } catch (e) {
       emit(TodosErrorState(e.toString()));
+    }
+  }
+
+  void changeCompletion(Todos todo) {
+    todoRepository.changeCompletion(!todo.completed!, todo.id).then((item) {
+      todo.completed = item.completed;
+      updateTodoList();
+    });
+  }
+
+  updateTodoList() {
+    final currentState = state;
+    if (currentState is TodosLoadedState) {
+      emit(TodosLoadedState(currentState.todos));
     }
   }
 }

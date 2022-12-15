@@ -1,41 +1,30 @@
-import 'package:to_do/data/models/items.dart';
-
-import 'meta.dart';
+import 'todos.dart';
 
 class Todo {
   Todo({
-    required this.code,
-    required this.success,
-    required this.timestamp,
-    required this.message,
-    required this.items,
-    required this.meta,
+    required this.todos,
+    required this.total,
+    required this.skip,
+    required this.limit,
   });
+  late final List<Todos> todos;
+  late final int total;
+  late final int skip;
+  late final int limit;
 
-  late final int code;
-  late final bool success;
-  late final int timestamp;
-  late final String message;
-  late final List<Items> items;
-  late final Meta meta;
-
-  Todo.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    success = json['success'];
-    timestamp = json['timestamp'];
-    message = json['message'];
-    items = List.from(json['items']).map((e) => Items.fromJson(e)).toList();
-    meta = Meta.fromJson(json['meta']);
+  Todo.fromJson(Map<String, dynamic> json){
+    todos = List.from(json['todos']).map((e)=>Todos.fromJson(e)).toList();
+    total = json['total'];
+    skip = json['skip'];
+    limit = json['limit'];
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['code'] = code;
-    data['success'] = success;
-    data['timestamp'] = timestamp;
-    data['message'] = message;
-    data['items'] = items.map((e) => e.toJson()).toList();
-    data['meta'] = meta.toJson();
+    data['todos'] = todos.map((e)=>e.toJson()).toList();
+    data['total'] = total;
+    data['skip'] = skip;
+    data['limit'] = limit;
     return data;
   }
 }

@@ -6,7 +6,7 @@ abstract class TodosState {}
 class TodosInitialState extends TodosState {}
 
 class TodosLoadedState extends TodosState {
-  final List<Items> todos;
+  final List<Todos> todos;
 
   TodosLoadedState(this.todos);
 }

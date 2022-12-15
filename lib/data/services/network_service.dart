@@ -28,10 +28,14 @@ class NetworkService {
     return response;
   }
 
-  Future<Response> patchRequest(String path, Map<String, bool> patchObj) async{
+  Future<Response> putRequest(String path, Map<String, bool>? patchObj,Map<String, String>? putObj) async{
       late Response response;
       try {
-        response = await _dio.put(path, data: patchObj);
+        if(patchObj!=null){
+          response = await _dio.put(path, data: patchObj);
+        } else if(putObj!=null){
+          response = await _dio.put(path, data: putObj);
+        }
       } on DioError catch (e) {
         if (kDebugMode) {
           print(e.message);
@@ -54,18 +58,18 @@ class NetworkService {
     return response;
   }
 
-  // Future<Response> putRequest(String path, CreateUser createUser) async {
-  //   late Response response;
-  //   try {
-  //     response = await _dio.put(path, data: createUser.toJson());
-  //   } on DioError catch (e) {
-  //     if (kDebugMode) {
-  //       print(e.message);
-  //     }
-  //     throw Exception(e.message);
-  //   }
-  //   return response;
-  // }
+  Future<Response> deleteRequest(String path) async {
+    late Response response;
+    try {
+      response = await _dio.delete(path);
+    } on DioError catch (e) {
+      if (kDebugMode) {
+        print(e.message);
+      }
+      throw Exception(e.message);
+    }
+    return response;
+  }
 
   _initializeInterceptors() {
     _dio.interceptors.add(InterceptorsWrapper(

@@ -4,25 +4,29 @@ class Todos {
     required this.todo,
     required this.completed,
     required this.userId,
+    this.isDeleted,
   });
   int? id;
   String? todo;
   bool? completed;
   int? userId;
+  bool? isDeleted;
 
   Todos.fromJson(Map<String, dynamic> json){
     id = json['id'];
     todo = json['todo'];
     completed = json['completed'];
     userId = json['userId'];
+    isDeleted = json['isDeleted'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['todo'] = todo;
-    _data['completed'] = completed;
-    _data['userId'] = userId;
-    return _data;
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['todo'] = todo;
+    data['completed'] = completed;
+    data['userId'] = userId;
+    data['isDeleted'] = isDeleted;
+    return data;
   }
 }

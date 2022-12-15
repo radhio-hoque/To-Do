@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do/data/models/todos.dart';
 
 import '../data/repositories/repository.dart';
@@ -41,6 +41,15 @@ class TodosCubit extends Cubit<TodosState> {
     if (currentState is TodosLoadedState) {
       final currentTodoList = currentState.todos;
       currentTodoList.add(todo);
+      emit(TodosLoadedState(currentTodoList));
+    }
+  }
+
+  void deleteTodo(Todos todo) {
+    final currentState = state;
+    if (currentState is TodosLoadedState) {
+      final currentTodoList = currentState.todos;
+      currentTodoList.remove(todo);
       emit(TodosLoadedState(currentTodoList));
     }
   }
